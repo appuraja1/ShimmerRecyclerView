@@ -1,64 +1,43 @@
-[![](https://jitpack.io/v/appuraja1/ShimmerRecyclerView.svg)](https://jitpack.io/#appuraja1/ShimmerRecyclerView)
+# ShimmerRecyclerView for Android
+
+[![JitPack](https://jitpack.io/v/appuraja1/ShimmerRecyclerView.svg)](https://jitpack.io/#appuraja1/ShimmerRecyclerView)
 [![API](https://img.shields.io/badge/API-23%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=23)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
+[![Platform](https://img.shields.io/badge/Platform-AndroidX-orange.svg)](https://developer.android.com/jetpack/androidx)
+[![Kotlin](https://img.shields.io/badge/Kotlin-2.0%2B-purple.svg)](https://kotlinlang.org)
 
-# ShimmerRecyclerView
+An efficient, lightweight custom **Android RecyclerView** with integrated **shimmer animation** and **skeleton loading placeholder** views. Seamlessly indicate background data fetching without messy layout toggling or boilerplate adapter logic. Fully compatible with **AndroidX**, Kotlin, Java, and modern Gradle builds.
 
-A custom RecyclerView with animated shimmer loading views to smoothly indicate background data loading. Built completely for modern **AndroidX**, Kotlin, and modern Gradle toolchains.
-
-It includes a built-in adapter to control the shimmer effect:
-* `showShimmerAdapter()` - Displays demo shimmer items while data is fetching.
-* `hideShimmerAdapter()` - Restores your original adapter and displays actual data.
+Powered by the hardware-accelerated **Facebook Shimmer** rendering pipeline for stutter-free 120Hz display support.
 
 ---
 
-## Demo
+## Key Features
 
-There are two kinds of shimmer animations available:
+* **Zero-Boilerplate Skeleton Screens:** Toggle loading placeholders with simple `showShimmerAdapter()` and `hideShimmerAdapter()` methods.
+* **Hardware Accelerated:** Built-in Facebook Shimmer engine ensures smooth rendering on high-refresh-rate screens.
+* **Flexible Layout Managers:** Native support for vertical, horizontal, and grid layout styles directly from XML.
+* **Dual Animation Modes:** Supports both full-item shimmer and selective masking (view background based).
+* **AndroidX & Java Ready:** 100% interoperable with both modern Kotlin extensions and legacy Java codebases.
 
-### 1. Full ViewHolder Animation
-The entire ViewHolder item animates across the surface.
+---
 
-| List Demo | Grid Demo |
+## Visual Preview
+
+| List Shimmer View | Grid Skeleton View |
 | :---: | :---: |
-| <img src="screenshots/list_demo.gif" height="444" width="250" /> | <img src="screenshots/grid_demo.gif" height="444" width="250" /> |
+| <img src="screenshots/list_demo.gif" alt="Android RecyclerView List Shimmer Effect" width="260" /> | <img src="screenshots/grid_demo.gif" alt="Android Grid Skeleton Loading View" width="260" /> |
 
-### 2. Selective View Mask Animation
-The shimmer effect is only visible over child views with non-transparent backgrounds.
-
-| List Demo | Grid Demo |
+| Selective Mask (List) | Selective Mask (Grid) |
 | :---: | :---: |
-| <img src="screenshots/second_list_demo.gif" height="444" width="250" /> | <img src="screenshots/second_grid_demo.gif" height="444" width="250" /> |
+| <img src="screenshots/second_list_demo.gif" alt="Android Shimmer Masking Effect" width="260" /> | <img src="screenshots/second_grid_demo.gif" alt="Android Skeleton Grid Shimmer" width="260" /> |
 
 ---
 
-## Shimmer Effect Setup
+## Quick Setup & Installation
 
-1. **Full Animation:** All child views inside your demo layout should have non-transparent backgrounds.
-2. **Selective Animation:** Add a parent ViewGroup with a transparent background, and set non-transparent backgrounds only to the child views (e.g., TextViews or ImageViews) you want to shimmer. Use `app:shimmer_demo_view_holder_item_background` to set an overall background for the ViewHolder if needed.
-
----
-
-## XML Attributes & Methods
-
-| XML Attribute | Kotlin / Java Method | Description |
-| :--- | :--- | :--- |
-| `app:shimmer_demo_child_count` | `setDemoChildCount(count: Int)` | Total count of shimmer placeholder items. |
-| `app:shimmer_demo_grid_child_count` | `setGridChildCount(count: Int)` | Number of columns when using a Grid layout. |
-| `app:shimmer_demo_layout` | `setDemoLayoutReference(resId: Int)` | Layout resource reference (`@layout/my_placeholder`). |
-| `app:shimmer_demo_layout_manager_type` | `setDemoLayoutManager(type: LayoutManagerType)` | Layout type: `linear_vertical`, `linear_horizontal`, or `grid`. |
-| `app:shimmer_demo_shimmer_color` | — | Color of the shimmer wave line. |
-| `app:shimmer_demo_angle` | — | Shimmer wave angle (0 to 30 degrees). |
-| `app:shimmer_demo_mask_width` | `setDemoShimmerMaskWidth(width: Float)` | Width ratio of the shimmer line (0.0 to 1.0). |
-| `app:shimmer_demo_duration` | `setDemoShimmerDuration(duration: Int)` | Animation duration in milliseconds. |
-| `app:shimmer_demo_view_holder_item_background` | — | Background drawable or color for the shimmer ViewHolder. |
-| `app:shimmer_demo_reverse_animation` | — | Reverse animation direction (right-to-left). Default is `false`. |
-
----
-
-## Installation
-
-### 1. Add JitPack repository
-Add it to your root `settings.gradle` inside `dependencyResolutionManagement`:
+### Step 1: Add JitPack Repository
+Add JitPack to your project's root `settings.gradle`:
 
 ```groovy
 dependencyResolutionManagement {
@@ -71,72 +50,105 @@ dependencyResolutionManagement {
 }
 ```
 
-### 2. Add Dependency
-Add this to your app module's `build.gradle`:
+### Step 2: Add Gradle Dependency
+Add the library dependency to your app module's `build.gradle`:
 
 ```groovy
 dependencies {
-    implementation 'com.github.appuraja1:shimmer-recyclerview:v1.0.3'
+    implementation 'com.github.appuraja1:ShimmerRecyclerView:v1.1.0'
 }
 ```
 
 ---
 
-## Usage
+## How to Use
 
-### XML Layout
+### 1. Define XML Layout
+Add `ShimmerRecyclerView` directly to your layout XML and specify your skeleton placeholder view:
+
 ```xml
 <com.appuraja.views.shimmer.ShimmerRecyclerView
-    android:id="@+id/shimmer_recycler_view"
+    xmlns:android="[http://schemas.android.com/apk/res/android](http://schemas.android.com/apk/res/android)"
+    xmlns:app="[http://schemas.android.com/apk/res-auto](http://schemas.android.com/apk/res-auto)"
+    android:id="@+id/shimmerRecyclerView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:shimmer_demo_child_count="10"
+    app:shimmer_demo_child_count="8"
     app:shimmer_demo_grid_child_count="2"
     app:shimmer_demo_layout="@layout/layout_demo_grid"
     app:shimmer_demo_layout_manager_type="grid"
-    app:shimmer_demo_angle="20" />
+    app:shimmer_demo_angle="20"
+    app:shimmer_demo_duration="1000" />
 ```
 
-### Kotlin
+### 2. Control Shimmer in Activity or Fragment
+
+#### Kotlin Example
 ```kotlin
-val shimmerRecycler = findViewById<ShimmerRecyclerView>(R.id.shimmer_recycler_view)
+val shimmerRecyclerView = findViewById<ShimmerRecyclerView>(R.id.shimmerRecyclerView)
 
-// Show shimmer animation placeholder
-shimmerRecycler.showShimmerAdapter()
+// 1. Trigger shimmer loading while fetching data
+shimmerRecyclerView.showShimmerAdapter()
 
-// Later when data is loaded, set actual adapter and hide shimmer
-shimmerRecycler.adapter = actualAdapter
-shimmerRecycler.hideShimmerAdapter()
+// 2. Hide shimmer and render actual data when ready
+viewModel.data.observe(viewLifecycleOwner) { dataList ->
+    myActualAdapter.submitList(dataList)
+    shimmerRecyclerView.adapter = myActualAdapter
+    shimmerRecyclerView.hideShimmerAdapter()
+}
 ```
 
-### Java
+#### Java Example
 ```java
-ShimmerRecyclerView shimmerRecycler = findViewById(R.id.shimmer_recycler_view);
+ShimmerRecyclerView shimmerRecyclerView = findViewById(R.id.shimmerRecyclerView);
 
-// Optional: Programmatic setup if not using XML attributes
-// shimmerRecycler.setDemoChildCount(10);
-// shimmerRecycler.setDemoLayoutReference(R.layout.layout_demo_grid);
-// shimmerRecycler.setDemoLayoutManager(ShimmerRecyclerView.LayoutManagerType.GRID);
+// 1. Show skeleton loader
+shimmerRecyclerView.showShimmerAdapter();
 
-// 1. Show shimmer loading animation
-shimmerRecycler.showShimmerAdapter();
-
-// 2. Set actual adapter and hide shimmer once data is fetched
-shimmerRecycler.setAdapter(actualAdapter);
-shimmerRecycler.hideShimmerAdapter();
+// 2. Set actual adapter and dismiss skeleton loader once loaded
+shimmerRecyclerView.setAdapter(myActualAdapter);
+shimmerRecyclerView.hideShimmerAdapter();
 ```
 
 ---
 
-## Developed & Maintained By
+## XML Attributes & Customization
 
-* **Appu Raja** - bookboard.co@gmail.com
+Fine-tune your skeleton loading states using these attributes:
 
-Based on the original work by Harish Sridharan.
+| XML Attribute | Programmatic Method | Default | Description |
+| :--- | :--- | :---: | :--- |
+| `app:shimmer_demo_layout` | `setDemoLayoutReference(resId)` | — | **(Required)** Layout resource used as the skeleton placeholder. |
+| `app:shimmer_demo_child_count` | `setDemoChildCount(count)` | `10` | Total number of dummy placeholder items to display. |
+| `app:shimmer_demo_layout_manager_type` | `setDemoLayoutManager(type)` | `linear_vertical` | Layout mode: `linear_vertical`, `linear_horizontal`, or `grid`. |
+| `app:shimmer_demo_grid_child_count` | `setGridChildCount(count)` | `2` | Column span count when using `grid` layout. |
+| `app:shimmer_demo_duration` | `setDemoShimmerDuration(ms)` | `1000` | Duration of one full shimmer animation sweep in milliseconds. |
+| `app:shimmer_demo_angle` | — | `0` | Angle tilt of the shimmer wave line (between `0` and `30` degrees). |
+| `app:shimmer_demo_mask_width` | `setDemoShimmerMaskWidth(float)` | `0.5` | Width ratio of the animated light gradient (`0.0` to `1.0`). |
+| `app:shimmer_demo_shimmer_color` | — | `#A0FFFFFF` | Tint color of the animated shimmer sweep line. |
+| `app:shimmer_demo_reverse_animation`| — | `false` | When `true`, sweeps right-to-left instead of left-to-right. |
+| `app:shimmer_demo_view_holder_item_background` | — | transparent | Background drawable/color applied behind selective shimmer masks. |
 
-## Credits
+---
 
-* [ShimmerLayout](https://github.com/team-supercharge/ShimmerLayout)
+## ProGuard & R8 Optimization
+
+Rules are bundled via consumer configurations, but if manual keep rules are preferred:
+
+```pro
+-keep class com.appuraja.views.shimmer.** { *; }
+-keep class com.facebook.shimmer.** { *; }
+```
+
+---
+
+## Maintainer & Contributions
+
+* **Appu Raja** - [bookboard.co@gmail.com](mailto:bookboard.co@gmail.com)
+
+Pull requests, feature recommendations, and issue reports are welcome. Please star the repository if it helps your Android project!
+
+---
 
 ## License
 
@@ -154,3 +166,4 @@ distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
+```

@@ -76,7 +76,7 @@ Add this to your app module's `build.gradle`:
 
 ```groovy
 dependencies {
-    implementation 'com.github.appuraja1:shimmer-recyclerview:v1.0.0'
+    implementation 'com.github.appuraja1:shimmer-recyclerview:v1.0.3'
 }
 ```
 
@@ -130,9 +130,9 @@ shimmerRecycler.hideShimmerAdapter();
 
 ## Developed & Maintained By
 
-* **Appu Raja**
+* **Appu Raja** - bookboard.co@gmail.com
 
-Based on the original work by [Harish Sridharan](https://github.com/sharish).
+Based on the original work by Harish Sridharan.
 
 ## Credits
 

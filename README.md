@@ -76,7 +76,7 @@ Add this to your app module's `build.gradle`:
 
 ```groovy
 dependencies {
-    implementation 'com.github.appuraja1:shimmer-recyclerview:v1.0.3'
+    implementation 'com.github.appuraja1:shimmer-recyclerview:v1.1.0'
 }
 ```
 

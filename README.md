@@ -1,4 +1,4 @@
-[![JitPack](https://jitpack.io/v/YOUR_GITHUB_USERNAME/shimmer-recyclerview.svg)](https://jitpack.io/#YOUR_GITHUB_USERNAME/shimmer-recyclerview)
+[![JitPack](https://jitpack.io/v/appuraja1/shimmer-recyclerview.svg)](https://jitpack.io/#appuraja1/shimmer-recyclerview)
 [![API](https://img.shields.io/badge/API-23%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=23)
 
 # ShimmerRecyclerView
@@ -69,3 +69,74 @@ dependencyResolutionManagement {
         maven { url '[https://jitpack.io](https://jitpack.io)' }
     }
 }
+```
+
+### 2. Add Dependency
+Add this to your app module's `build.gradle`:
+
+```groovy
+dependencies {
+    implementation 'com.github.appuraja1:shimmer-recyclerview:v1.0.0'
+}
+```
+
+---
+
+## Usage
+
+### XML Layout
+```xml
+<com.appuraja.views.shimmer.ShimmerRecyclerView
+    android:id="@+id/shimmer_recycler_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:shimmer_demo_child_count="10"
+    app:shimmer_demo_grid_child_count="2"
+    app:shimmer_demo_layout="@layout/layout_demo_grid"
+    app:shimmer_demo_layout_manager_type="grid"
+    app:shimmer_demo_angle="20" />
+```
+
+### Activity / Fragment Setup (Kotlin)
+```kotlin
+val shimmerRecycler = findViewById<ShimmerRecyclerView>(R.id.shimmer_recycler_view)
+
+// Show shimmer animation placeholder
+shimmerRecycler.showShimmerAdapter()
+
+// Load actual data and restore normal adapter
+myViewModel.loadData { actualList ->
+    myActualAdapter.submitList(actualList)
+    shimmerRecycler.adapter = myActualAdapter
+    shimmerRecycler.hideShimmerAdapter()
+}
+```
+
+---
+
+## Developed & Maintained By
+
+* **Appu Raja**
+
+Based on the original work by [Harish Sridharan](https://github.com/sharish).
+
+## Credits
+
+* [ShimmerLayout](https://github.com/team-supercharge/ShimmerLayout)
+
+## License
+
+```text
+Copyright 2026 Appu Raja
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   [http://www.apache.org/licenses/LICENSE-2.0](http://www.apache.org/licenses/LICENSE-2.0)
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.

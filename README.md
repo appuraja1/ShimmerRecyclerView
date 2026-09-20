@@ -1,4 +1,4 @@
-[![JitPack](https://jitpack.io/v/appuraja1/shimmer-recyclerview.svg)](https://jitpack.io/#appuraja1/shimmer-recyclerview)
+[![](https://jitpack.io/v/appuraja1/ShimmerRecyclerView.svg)](https://jitpack.io/#appuraja1/ShimmerRecyclerView)
 [![API](https://img.shields.io/badge/API-23%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=23)
 
 # ShimmerRecyclerView
@@ -97,19 +97,33 @@ dependencies {
     app:shimmer_demo_angle="20" />
 ```
 
-### Activity / Fragment Setup (Kotlin)
+### Kotlin
 ```kotlin
 val shimmerRecycler = findViewById<ShimmerRecyclerView>(R.id.shimmer_recycler_view)
 
 // Show shimmer animation placeholder
 shimmerRecycler.showShimmerAdapter()
 
-// Load actual data and restore normal adapter
-myViewModel.loadData { actualList ->
-    myActualAdapter.submitList(actualList)
-    shimmerRecycler.adapter = myActualAdapter
-    shimmerRecycler.hideShimmerAdapter()
-}
+// Later when data is loaded, set actual adapter and hide shimmer
+shimmerRecycler.adapter = actualAdapter
+shimmerRecycler.hideShimmerAdapter()
+```
+
+### Java
+```java
+ShimmerRecyclerView shimmerRecycler = findViewById(R.id.shimmer_recycler_view);
+
+// Optional: Programmatic setup if not using XML attributes
+// shimmerRecycler.setDemoChildCount(10);
+// shimmerRecycler.setDemoLayoutReference(R.layout.layout_demo_grid);
+// shimmerRecycler.setDemoLayoutManager(ShimmerRecyclerView.LayoutManagerType.GRID);
+
+// 1. Show shimmer loading animation
+shimmerRecycler.showShimmerAdapter();
+
+// 2. Set actual adapter and hide shimmer once data is fetched
+shimmerRecycler.setAdapter(actualAdapter);
+shimmerRecycler.hideShimmerAdapter();
 ```
 
 ---

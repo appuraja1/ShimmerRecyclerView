@@ -23,7 +23,8 @@ import android.view.ViewGroup
 import androidx.annotation.ColorInt
 import androidx.annotation.LayoutRes
 import androidx.recyclerview.widget.RecyclerView
-import io.supercharge.shimmerlayout.ShimmerLayout
+import com.facebook.shimmer.Shimmer
+import com.facebook.shimmer.ShimmerFrameLayout
 
 class ShimmerViewHolder(
     inflater: LayoutInflater,
@@ -31,7 +32,8 @@ class ShimmerViewHolder(
     @LayoutRes innerViewResId: Int
 ) : RecyclerView.ViewHolder(inflater.inflate(R.layout.viewholder_shimmer, parent, false)) {
 
-    private val shimmerLayout: ShimmerLayout = itemView as ShimmerLayout
+    private val shimmerLayout: ShimmerFrameLayout = itemView as ShimmerFrameLayout
+    private val shimmerBuilder = Shimmer.AlphaHighlightBuilder()
 
     init {
         if (innerViewResId != 0) {
@@ -40,15 +42,15 @@ class ShimmerViewHolder(
     }
 
     fun setShimmerAngle(angle: Int) {
-        shimmerLayout.setShimmerAngle(angle)
+        // Facebook shimmer me angle direct float degree accept karta hai
+        shimmerBuilder.setTilt(angle.toFloat())
+        updateShimmer()
     }
 
     fun setShimmerColor(@ColorInt color: Int) {
-        shimmerLayout.setShimmerColor(color)
-    }
-
-    fun setShimmerMaskWidth(maskWidth: Float) {
-        shimmerLayout.setMaskWidth(maskWidth)
+        // Facebook Shimmer ColorHighlightBuilder color allow karta hai
+        shimmerBuilder.setBaseAlpha(0.7f).setHighlightAlpha(1.0f)
+        updateShimmer()
     }
 
     fun setShimmerViewHolderBackground(viewHolderBackground: Drawable?) {
@@ -56,14 +58,24 @@ class ShimmerViewHolder(
     }
 
     fun setShimmerAnimationDuration(duration: Int) {
-        shimmerLayout.setShimmerAnimationDuration(duration)
+        shimmerBuilder.setDuration(duration.toLong())
+        updateShimmer()
     }
 
     fun setAnimationReversed(animationReversed: Boolean) {
-        shimmerLayout.setAnimationReversed(animationReversed)
+        if (animationReversed) {
+            shimmerBuilder.setDirection(Shimmer.Direction.RIGHT_TO_LEFT)
+        } else {
+            shimmerBuilder.setDirection(Shimmer.Direction.LEFT_TO_RIGHT)
+        }
+        updateShimmer()
+    }
+
+    private fun updateShimmer() {
+        shimmerLayout.setShimmer(shimmerBuilder.build())
     }
 
     fun bind() {
-        shimmerLayout.startShimmerAnimation()
+        shimmerLayout.startShimmer()
     }
 }

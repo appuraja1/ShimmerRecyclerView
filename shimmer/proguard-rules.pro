@@ -16,5 +16,5 @@
 #   public *;
 #}
 # consumer-rules.pro
--keep class com.appuraja.views.shimmer.** { *; }
--keep class io.supercharge.shimmerlayout.** { *; }
+#  -keep class com.facebook.shimmer.** { *; }
+#  -keep class com.appuraja.views.shimmer.** { *; }#

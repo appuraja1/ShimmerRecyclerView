@@ -9,6 +9,7 @@
     <color name="colorAccentGrid">#388e3c</color>
 
     <color name="textPrimaryGrid">#717171</color>
+    <color name="shimmer_color">#717171</color>
     <color name="textSecondaryGrid">@color/colorAccentGrid</color>
     <color name="textTertiaryGrid">#737373</color>
 
